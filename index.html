@@ -200,14 +200,19 @@
             document.getElementById("customPopup").style.display = "none";
         }
 
-        // JW Player Setup
-        jwplayer("jwplayerDiv").setup({
-            file: "https://vkvsd190.okcdn.ru:443/hls/8187755498026.m3u8/sig/YfPFGEIIF_g/expires/1743262069875/srcIp/103.145.50.159/urls/185.226.52.96/clientType/14/srcAg/CHROME_ANDROID/mid/9685632297770/8187755498026_lowest/index.m3u8",
-            autostart: true,
-            width: "100%",
-            height: "100%",
-            stretching: "uniform"
-        });
+              // Fetch JSON and Load JW Player
+        fetch("https://raw.githubusercontent.com/StmpupCricket/T-Sports-json/refs/heads/main/data.json") // Replace with actual hosted JSON URL
+            .then(response => response.json())
+            .then(data => {
+                jwplayer("jwplayerDiv").setup({
+                    file: data.stream_url,
+                    autostart: true,
+                    width: "100%",
+                    height: "100%",
+                    stretching: "uniform"
+                });
+            })
+            .catch(error => console.error("Error loading JSON:", error));
     </script>
 
 </body>
